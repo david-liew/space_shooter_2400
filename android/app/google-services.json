@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "992594950164",
+    "project_id": "spacescape-4b841",
+    "storage_bucket": "spacescape-4b841.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:992594950164:android:8f08d81c109feb2fee8f01",
+        "android_client_info": {
+          "package_name": "com.example.space_shooter_2400"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "992594950164-s7ph443crts8j2iof6tvqg25fbsitnu0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCsqJm01hjzXIoj4C9r7O--qEu-kXFDGng"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "992594950164-s7ph443crts8j2iof6tvqg25fbsitnu0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

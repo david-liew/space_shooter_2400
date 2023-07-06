@@ -3,7 +3,6 @@ import 'dart:math';
 import 'package:flame/collisions.dart';
 // import 'package:flame/effects.dart';
 import 'package:flame/experimental.dart';
-import 'package:flame/input.dart';
 import 'package:flame/particles.dart';
 import 'package:flame/components.dart';
 // import 'package:flame_noise/flame_noise.dart';

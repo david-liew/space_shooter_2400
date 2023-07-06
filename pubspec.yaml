@@ -19,6 +19,8 @@ dependencies:
     sdk: flutter
   cupertino_icons: 1.0.5
   hive_flutter: 1.1.0
+  firebase_core: ^2.14.0
+  cloud_firestore: ^4.8.2
   # flame_noise: 0.1.1
 
 dev_dependencies:

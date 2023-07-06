@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.15)
 project(space_shooter_2400 LANGUAGES CXX)
 
-set(BINARY_NAME "Space Shooter 2400")
+set(BINARY_NAME "space_shooter_2400")
 
 cmake_policy(SET CMP0063 NEW)
 

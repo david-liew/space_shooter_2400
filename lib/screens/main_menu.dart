@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:space_shooter_2400/models/account.dart';
+import 'package:space_shooter_2400/screens/create_account.dart';
 
 import 'settings_menu.dart';
 import 'select_spaceship.dart';
@@ -40,11 +42,10 @@ class MainMenu extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 3,
               child: ElevatedButton(
                 onPressed: () {
-                  // Push and replace current screen (i.e MainMenu) with
-                  // SelectSpaceship(), so that player can select a spaceship.
+                  //if(Account().id)
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
-                      builder: (context) => const SelectSpaceship(),
+                      builder: (context) => const CreateAccount(),
                     ),
                   );
                 },

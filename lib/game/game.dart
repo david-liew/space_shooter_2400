@@ -91,7 +91,7 @@ class SpaceShooterGame extends FlameGame
       joystick = JoystickComponent(
         anchor: Anchor.bottomLeft,
         //position: Vector2(30, fixedResolution.y - 30),
-        margin:  EdgeInsets.only(left: 20, bottom: 20),
+        margin:  const EdgeInsets.only(left: 20, bottom: 20),
         background: CircleComponent(
           radius: 60,
           paint: Paint()..color = Colors.white.withOpacity(0.5),
