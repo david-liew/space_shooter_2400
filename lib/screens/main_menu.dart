@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:space_shooter_2400/models/account.dart';
 import 'package:space_shooter_2400/screens/create_account.dart';
 
 import 'settings_menu.dart';
@@ -42,12 +41,23 @@ class MainMenu extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 3,
               child: ElevatedButton(
                 onPressed: () {
-                  //if(Account().id)
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const CreateAccount(),
-                    ),
-                  );
+                  IDStorage storage = IDStorage();
+                  //storage.writeID("0");
+                  storage.readID().then((String value) {
+                    if (value==""||value=="0") {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => CreateAccount(),
+                        ),
+                      );
+                    } else {
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const SelectSpaceship(),
+                        ),
+                      );
+                    }
+                  });
                 },
                 child: const Text('Play'),
               ),

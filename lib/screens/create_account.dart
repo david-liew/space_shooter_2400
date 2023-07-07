@@ -1,17 +1,50 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:space_shooter_2400/models/firebase.dart';
 
 import '../models/account.dart';
-import 'settings_menu.dart';
 import 'select_spaceship.dart';
+import 'dart:async';
+import 'dart:io';
 
 // Represents the main menu screen of Spacescape, allowing
 // players to start the game or modify in-game settings.
 
+class IDStorage {
+  Future<String> get _localPath async {
+    final dir = await getApplicationDocumentsDirectory();
+    return dir.path;
+  }
+
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    return File('$path/ID.txt');
+  }
+
+  Future<String> readID() async {
+    try {
+      final file = await _localFile;
+
+      // Read the file
+      final contents = await file.readAsString();
+
+      return contents;
+    } catch (e) {
+      return "";
+    }
+  }
+
+  Future<File> writeID(String id) async {
+    final file = await _localFile;
+    return file.writeAsString('$id');
+  }
+}
+
 class CreateAccount extends StatefulWidget {
-  const CreateAccount({Key? key}) : super(key: key);
+  CreateAccount({Key? key}) : super(key: key);
+  final IDStorage storage = IDStorage();
 
   @override
   State<StatefulWidget> createState() => _StatefulTextField();
@@ -23,6 +56,7 @@ class _StatefulTextField extends State<CreateAccount> {
   String _name = "What should we call you?";
   final _formKey = GlobalKey<FormState>();
   String _errorText = "";
+  String _id = "0";
 
   FireBase fb = FireBase();
 
@@ -31,6 +65,16 @@ class _StatefulTextField extends State<CreateAccount> {
     super.initState();
     _focusNode = FocusNode(debugLabel: 'TextField');
     _focusNode.addListener(_handleFocusChange);
+    widget.storage.readID().then((String value) {
+      setState(() {
+        _id = value;
+      });
+    });
+  }
+
+  Future<File> saveIDToLocalDir(String value) {
+    _id = value;
+    return widget.storage.writeID(_id);
   }
 
   void _handleFocusChange() {
@@ -54,6 +98,7 @@ class _StatefulTextField extends State<CreateAccount> {
         onTap: () {
           if (_focused) {
             _focusNode.unfocus();
+            SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
           } else {
             _focusNode.requestFocus();
           }
@@ -112,8 +157,13 @@ class _StatefulTextField extends State<CreateAccount> {
                   width: MediaQuery.of(context).size.width / 3,
                   child: ElevatedButton(
                     onPressed: () {
+                      SystemChrome.setEnabledSystemUIMode(
+                          SystemUiMode.immersiveSticky);
                       if (_formKey.currentState!.validate()) {
                         fb.addAccountByName(_name);
+                        fb
+                            .getIDByName(_name)
+                            .then((String value) => saveIDToLocalDir(value));
                         Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => const SelectSpaceship(),
@@ -125,7 +175,7 @@ class _StatefulTextField extends State<CreateAccount> {
                     },
                     child: const Text('Let\'s Rock'),
                   ),
-                ),
+                )
               ],
             ),
           ),

@@ -117,3 +117,4 @@ Future<Settings> getSettings() async {
   return box.get(Settings.settingsKey)!;
 
 }
+

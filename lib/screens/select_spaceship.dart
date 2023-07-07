@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
+import 'package:space_shooter_2400/models/firebase.dart';
+import 'package:space_shooter_2400/screens/create_account.dart';
 
 import '../models/player_data.dart';
 import '../models/spaceship_details.dart';
@@ -10,8 +12,29 @@ import 'main_menu.dart';
 
 // Represents the spaceship selection menu from where player can
 // change current spaceship or buy a new one.
-class SelectSpaceship extends StatelessWidget {
+class SelectSpaceship extends StatefulWidget {
   const SelectSpaceship({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _SelectSpaceShip();
+}
+
+class _SelectSpaceShip extends State<SelectSpaceship>{
+  final FireBase fb=FireBase();
+  final IDStorage idStorage=IDStorage();
+  late String username;
+
+  @override
+  void initState() {
+    super.initState();
+    idStorage.readID().then((String value){
+      fb.getNameByID(value).then((String value){
+        setState(() {
+          username=value;
+        });
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,4 +200,6 @@ class SelectSpaceship extends StatelessWidget {
       ),
     );
   }
+  
+
 }
