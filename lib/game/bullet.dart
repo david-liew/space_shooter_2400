@@ -3,7 +3,6 @@ import 'package:flame/components.dart';
 
 import 'enemy.dart';
 
-// This component represent a bullet in game world.
 class Bullet extends SpriteComponent with CollisionCallbacks {
   // Speed of the bullet.
   final double _speed = 450;
