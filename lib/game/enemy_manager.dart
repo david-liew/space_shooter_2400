@@ -11,9 +11,6 @@ import 'enemy.dart';
 import '../models/enemy_data.dart';
 import '../models/player_data.dart';
 
-// This component class takes care of spawning new enemy components
-// randomly from top of the screen. It uses the HasGameReference mixin so that
-// it can add child components.
 class EnemyManager extends Component with HasGameReference<SpaceShooterGame> {
   // The timer which runs the enemy spawner code at regular interval of time.
   late Timer _timer;
