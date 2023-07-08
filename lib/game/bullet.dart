@@ -3,16 +3,12 @@ import 'package:flame/components.dart';
 
 import 'enemy.dart';
 
-// This component represent a bullet in game world.
 class Bullet extends SpriteComponent with CollisionCallbacks {
   // Speed of the bullet.
   final double _speed = 450;
 
-  // Controls the direction in which bullet travels.
   Vector2 direction = Vector2(0, -1);
 
-  // Level of this bullet. Essentially represents the
-  // level of spaceship that fired this bullet.
   final int level;
 
   Bullet({
